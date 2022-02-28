@@ -10,7 +10,11 @@ class StringCalculator
             return "0";
         if(str_contains($numbers, ",")) {
             $splitString = explode(",",$numbers);
-            return $splitString[0] + $splitString[1];
+            $sum = 0;
+            foreach ($splitString as $number) {
+                $sum = $sum + $number;
+            }
+            return $sum;
         }
         return $numbers;
 

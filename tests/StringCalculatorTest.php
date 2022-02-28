@@ -9,6 +9,8 @@ use PHPUnit\Framework\TestCase;
 
 final class StringCalculatorTest extends TestCase
 {
+
+
     /**
      * @test
      */
@@ -53,4 +55,14 @@ final class StringCalculatorTest extends TestCase
         $this->assertEquals("3.3",$calculatedString);
     }
 
+    /**
+     * @test
+     */
+    public function more_than_two_numbers_return_sum()
+    {
+        $stringCalculator = new StringCalculator();
+        $calculatedString = $stringCalculator->add("1.1,2.2,3.3");
+
+        $this->assertEquals("6.6",$calculatedString);
+    }
 }
