@@ -65,4 +65,15 @@ final class StringCalculatorTest extends TestCase
 
         $this->assertEquals("6.6",$calculatedString);
     }
+
+    /**
+     * @test
+     */
+    public function allows_string_with_newline_separator()
+    {
+        $stringCalculator = new StringCalculator();
+        $calculatedString = $stringCalculator->add("1\n2,3");
+
+        $this->assertEquals("6",$calculatedString);
+    }
 }

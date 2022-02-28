@@ -8,16 +8,13 @@ class StringCalculator
     {
         if(empty($numbers))
             return "0";
-        if(str_contains($numbers, ",")) {
-            $splitString = explode(",",$numbers);
-            $sum = 0;
-            foreach ($splitString as $number) {
-                $sum = $sum + $number;
-            }
-            return $sum;
+        $splitString = str_replace("\n",",",$numbers);
+        $splitString = explode(",",$splitString);
+        $sum = 0;
+        foreach ($splitString as $number) {
+            $sum = $sum + $number;
         }
-        return $numbers;
-
+        return $sum;
     }
 
 }
