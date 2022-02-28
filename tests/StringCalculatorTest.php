@@ -42,6 +42,15 @@ final class StringCalculatorTest extends TestCase
         $this->assertEquals("1.1",$calculatedString);
     }
 
+    /**
+     * @test
+     */
+    public function two_numbers_return_sum()
+    {
+        $stringCalculator = new StringCalculator();
+        $calculatedString = $stringCalculator->add("1.1,2.2");
 
+        $this->assertEquals("3.3",$calculatedString);
+    }
 
 }
