@@ -10,6 +10,10 @@ class StringCalculator
             return "0";
         }
 
+        if(str_ends_with($numbers, ",")) {
+            return ("Number expected but not found.");
+        }
+
         $checkedMultipleSeparators = $this->checkForMultipleSeparators($numbers);
         if($checkedMultipleSeparators[0]) {
             return ("Number expected but '" . $checkedMultipleSeparators[1] . "' found at position " . $checkedMultipleSeparators[2] . ".");
@@ -17,6 +21,8 @@ class StringCalculator
 
         $splitString = str_replace("\n",",",$numbers);
         $splitString = explode(",",$splitString);
+
+
         $sum = 0;
         foreach ($splitString as $number) {
             $sum = $sum + $number;
@@ -43,4 +49,5 @@ class StringCalculator
 
         return  [false];
     }
+
 }
