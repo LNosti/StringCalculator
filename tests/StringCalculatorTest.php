@@ -12,12 +12,23 @@ final class StringCalculatorTest extends TestCase
     /**
      * @test
      */
-    public function string_is_empty()
+    public function empty_string_returns_0()
     {
         $stringCalculator = new StringCalculator();
         $calculatedString = $stringCalculator->add('0');
 
         $this->assertEquals("0",$calculatedString);
+    }
+
+    /**
+     * @test
+     */
+    public function one_number_returns_same_number()
+    {
+        $stringCalculator = new StringCalculator();
+        $calculatedString = $stringCalculator->add("1");
+
+        $this->assertEquals("1",$calculatedString);
     }
 
 }
