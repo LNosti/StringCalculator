@@ -76,4 +76,15 @@ final class StringCalculatorTest extends TestCase
 
         $this->assertEquals("6",$calculatedString);
     }
+
+    /**
+     * @test
+     */
+    public function invalid_using_multiple_successive_separators()
+    {
+        $stringCalculator = new StringCalculator();
+        $calculatedString = $stringCalculator->add("175.2,\n35");
+
+        $this->assertEquals("Number expected but '\\n' found at position 6.",$calculatedString);
+    }
 }
