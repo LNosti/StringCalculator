@@ -8,37 +8,49 @@ class StringCalculator
 {
     function add(String $numbers): String
     {
+        $errors = "";
+        $hasErrors = false;
         if(empty($numbers)) {
             return "0";
         }
 
         if(str_ends_with($numbers, ",")) {
-            return ("Number expected but not found.");
+            $hasErrors = true;
+            $errors .= ("Number expected but not found.");
         }
         $splitString = $this->checkForCustomSeparator($numbers);
         if(empty($splitString)) {
             $checkedMultipleSeparators = $this->checkForMultipleSeparators($numbers);
             if ($checkedMultipleSeparators[0]) {
-                return ("Number expected but '" . $checkedMultipleSeparators[1] . "' found at position " . $checkedMultipleSeparators[2] . ".");
+                $hasErrors = true;
+                $errors .= ("Number expected but '" . $checkedMultipleSeparators[1] . "' found at position " . $checkedMultipleSeparators[2] . ".");
             }
 
             $splitString = str_replace("\n", ",", $numbers);
         }
 
-        if (str_contains($splitString,"'")) {
-            return $splitString;
+        else if (str_contains($splitString,"expected but ','")) {
+            $hasErrors = true;
+            $errors .= $splitString;
         }
         $splitString = explode(",",$splitString);
 
         $checkedForNegatives = $this->checkForNegatives($splitString);
         if(!empty($checkedForNegatives)) {
-            return ("Negative not allowed: " . $checkedForNegatives);
+            $hasErrors = true;
+            $errors .= ("Negative not allowed: " . $checkedForNegatives);
+        }
+
+        if($hasErrors) {
+            return $errors;
         }
 
         $sum = 0;
         foreach ($splitString as $number) {
             $sum = $sum + $number;
         }
+
+
         return $sum;
     }
 
@@ -80,7 +92,7 @@ class StringCalculator
     private function checkForNegatives($numbers) : String {
         $negativeNumbers = "";
         foreach ($numbers as $number) {
-            if($number < 0) {
+            if(is_numeric($number) & $number < 0) {
                 $negativeNumbers = $negativeNumbers . $number . ", ";
             }
         }

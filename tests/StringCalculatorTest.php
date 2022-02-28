@@ -131,4 +131,15 @@ final class StringCalculatorTest extends TestCase
 
         $this->assertEquals("Negative not allowed: -4, -5",$calculatedString);
     }
+
+    /**
+     * @test
+     */
+    public function multiple_errors_return_multiple_error_messages()
+    {
+        $stringCalculator = new StringCalculator();
+        $calculatedString = $stringCalculator->add("1,,-2");
+
+        $this->assertEquals("Number expected but ',' found at position 2.Negative not allowed: -2",$calculatedString);
+    }
 }
