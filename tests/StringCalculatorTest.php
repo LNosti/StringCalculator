@@ -31,4 +31,17 @@ final class StringCalculatorTest extends TestCase
         $this->assertEquals("1",$calculatedString);
     }
 
+    /**
+     * @test
+     */
+    public function one_number_with_decimals_returns_same_number()
+    {
+        $stringCalculator = new StringCalculator();
+        $calculatedString = $stringCalculator->add("1.1");
+
+        $this->assertEquals("1.1",$calculatedString);
+    }
+
+
+
 }
