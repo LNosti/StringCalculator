@@ -109,4 +109,15 @@ final class StringCalculatorTest extends TestCase
 
         $this->assertEquals("3",$calculatedString);
     }
+
+    /**
+     * @test
+     */
+    public function invalid_string_with_custom_separator()
+    {
+        $stringCalculator = new StringCalculator();
+        $calculatedString = $stringCalculator->add("//|\n1|2,3");
+
+        $this->assertEquals("'|' expected but ',' found at position 3.",$calculatedString);
+    }
 }

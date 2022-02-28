@@ -22,6 +22,10 @@ class StringCalculator
 
             $splitString = str_replace("\n", ",", $numbers);
         }
+
+        if (str_contains($splitString,"'")) {
+            return $splitString;
+        }
         $splitString = explode(",",$splitString);
 
 
@@ -57,6 +61,10 @@ class StringCalculator
         if(str_starts_with($numbers,"//")) {
             $splitString = explode("\n",$numbers);
             $splitString[0] = substr($splitString[0],strlen("//"));
+            if(str_contains($numbers,",")) {
+                return "'" . $splitString[0] . "' expected but ',' found at position " . (strpos($splitString[1], ",")) . ".";
+
+            }
             $splitString[1] = str_replace($splitString[0],",",$splitString[1]);
             return $splitString[1];
         }
