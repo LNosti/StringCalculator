@@ -2,6 +2,8 @@
 
 namespace Deg540\PHPTestingBoilerplate;
 
+use phpDocumentor\Reflection\PseudoTypes\NegativeInteger;
+
 class StringCalculator
 {
     function add(String $numbers): String
@@ -28,6 +30,10 @@ class StringCalculator
         }
         $splitString = explode(",",$splitString);
 
+        $checkedForNegatives = $this->checkForNegatives($splitString);
+        if(!empty($checkedForNegatives)) {
+            return ("Negative not allowed: " . $checkedForNegatives);
+        }
 
         $sum = 0;
         foreach ($splitString as $number) {
@@ -69,6 +75,20 @@ class StringCalculator
             return $splitString[1];
         }
         return '0';
+    }
+
+    private function checkForNegatives($numbers) : String {
+        $negativeNumbers = "";
+        foreach ($numbers as $number) {
+            if($number < 0) {
+                $negativeNumbers = $negativeNumbers . $number . ", ";
+            }
+        }
+        if(!empty($negativeNumbers)) {
+            $negativeNumbers = substr($negativeNumbers, 0, -2);
+        }
+        return $negativeNumbers;
+
     }
 
 }
